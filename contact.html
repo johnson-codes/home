@@ -98,6 +98,29 @@
             background-color: silver;
             margin: 0;
         }
+        .hero-heading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(192, 192, 192, 0.7); /* Updated background color with half transparency */
+            padding: 1rem 2rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: black;
+            text-align: center;
+            z-index: 1;
+            border-radius: 10px;
+            width: 40%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        .hero-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
@@ -112,7 +135,10 @@
         <a href="signup.html">Sign Up</a>
     </nav>
     <hr class="silver-line">
-    <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0596/6272/9325/files/DALL_E_2024-10-12_13.06.01_-_A_minimalist_black_and_white_image_with_a_philosophical_tone_representing_software_engineering._The_design_features_a_simple_empty_desk_with_a_sing.webp?v=1728763627" alt="Contact Hero Image">
+    <div class="hero-container">
+        <img class="hero-image" src="https://cdn.shopify.com/s/files/1/0596/6272/9325/files/DALL_E_2024-10-12_13.06.01_-_A_minimalist_black_and_white_image_with_a_philosophical_tone_representing_software_engineering._The_design_features_a_simple_empty_desk_with_a_sing.webp?v=1728763627" alt="Contact Hero Image">
+        <h2 class="hero-heading">Contact Us</h2>
+    </div>
     <div class="container">
         <!-- Add your contact form or contact information here -->
     </div>
