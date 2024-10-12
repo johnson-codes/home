@@ -1,1 +1,121 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto; /* Center the container */
+            padding: 2rem;
+            padding-left: 4rem; /* Add more space on the left */
+            padding-right: 4rem; /* Add more space on the right */
+        }
+        .hero {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+        .service {
+            background-color: #fff;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .service h2 {
+            margin-top: 0;
+        }
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn.shopify.com/s/files/1/0596/6272/9325/files/000.svg?v=1728706434" alt="Software Engineering Services Logo">
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Services</a>
+        <a href="contact.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to Your Software Engineering Solution</h1>
+            <p>Providing top-notch software engineering services to help you build and maintain your software projects.</p>
+        </div>
+        <div class="services" id="services">
+            <div class="service">
+                <h2>Consulting</h2>
+                <p>Expert advice to help you navigate complex software challenges.</p>
+            </div>
+            <div class="service">
+                <h2>Development</h2>
+                <p>Custom software development tailored to your needs.</p>
+            </div>
+            <div class="service">
+                <h2>Maintenance</h2>
+                <p>Ongoing support and maintenance to keep your software running smoothly.</p>
+            </div>
+            <div class="service">
+                <h2>Testing</h2>
+                <p>Comprehensive testing services to ensure your software is bug-free.</p>
+            </div>
+            <div class="service">
+                <h2>Training</h2>
+                <p>Professional training to help your team get up to speed with the latest technologies.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2040 Software Engineering Services. All rights reserved.</p>
+    </footer>
+</body>
+</html>
