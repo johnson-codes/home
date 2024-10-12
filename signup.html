@@ -1,1 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up to InsideBox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/technology.png?v=1728713072');
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+        }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .signup-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increased shadow values */
+            width: 250px;
+            margin: 80px auto 50px;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        input[type="email"], input[type="password"] {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://cdn.shopify.com/s/files/1/0596/6272/9325/files/000.svg?v=1728706434" alt="Software Engineering Services Logo">
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="signup-container">
+        <div>
+            <h2>Start your journey</h2>
+            <h1>Sign Up to InsideBox</h1>
+        </div>
+        <form action="/submit-your-form-handler" method="POST">
+            <input type="email" id="email" name="email" placeholder="Email address" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="repeat-password" name="repeat-password" placeholder="Repeat password" required>
+            <button type="submit">Sign up</button>
+        </form>
+        <p>Already have an account? <a href="/signin">Sign in</a></p>
+    </div>
+</body>
+</html>
