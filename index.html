@@ -11,11 +11,11 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-        header {
+        header, footer {
             background-color: #333;
             color: #fff;
-            padding: 1rem 0;
             text-align: center;
+            padding: 1rem 0;
         }
         nav {
             background-color: #444;
@@ -27,63 +27,57 @@
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
+            font-weight: bold; /* Make font bold */
+            font-size: 1.1rem; /* Increase font size */
+            padding: 0.5rem 1rem; /* Add padding for hover effect */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.8); /* Light white background */
+            color: #000; /* Change text color to black */
         }
         .container {
             max-width: 1600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            padding-left: 4rem;
-            padding-right: 4rem;
+            margin: 0 auto; /* Center the container */
+            padding: 0; /* Remove padding */
         }
         .hero {
-            background-color: #007BFF;
+            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/000_17d1cdde-ae62-4986-8802-b6853ab237c1.png?v=1728768430');
+            background-size: cover;
+            background-position: center;
+            height: 520px; /* Further reduced height for smaller hero image */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #fff;
-            padding: 2rem;
             text-align: center;
             border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-top: 4px solid silver; /* Add silver line */
         }
         .hero h1 {
             margin: 0;
             font-size: 2.5rem;
         }
         .services {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem 0.1rem;
-            margin-top: 2rem;
-            justify-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 2rem; /* Add padding to services section */
         }
         .service {
+            flex: 1 1 calc(33.333% - 2rem);
+            margin: 1rem;
             background-color: #fff;
             padding: 1rem;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 350px;
-            height: calc(350px * 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .service h2 {
-            margin-top: 0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         @media (max-width: 768px) {
-            .services {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
             .service {
-                width: 90%;
-                height: auto;
+                flex: 1 1 100%;
             }
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
         }
     </style>
 </head>
@@ -100,8 +94,7 @@
     </nav>
     <div class="container">
         <div class="hero">
-            <h1>Welcome to Your Software Engineering Solution</h1>
-            <p>Providing top-notch software engineering services to help you build and maintain your software projects.</p>
+            <h1>Your Partner in Digital Innovation</h1>
         </div>
         <div class="services" id="services">
             <div class="service">
