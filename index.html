@@ -29,7 +29,7 @@
             text-decoration: none;
         }
         .container {
-            max-width: 1100px;
+            max-width: 1600px; /* Increased max-width to accommodate wider service containers */
             margin: 2rem auto; /* Center the container */
             padding: 2rem;
             padding-left: 4rem; /* Add more space on the left */
@@ -49,22 +49,33 @@
         .services {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-            margin-top: 4rem;
+            gap: 3rem 0.1rem; /* Maintain vertical and horizontal gaps */
+            margin-top: 2rem;
+            justify-items: center;
         }
         .service {
             background-color: #fff;
-            padding: 4rem;
+            padding: 1rem;
             border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
             text-align: center;
+            width: 350px; /* Increased width from 300px to 350px */
+            height: calc(350px * 0.5); /* Adjusted height to maintain 2:1 ratio */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .service h2 {
             margin-top: 0;
         }
         @media (max-width: 768px) {
             .services {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Single column layout for smaller screens */
+                gap: 1rem; /* Smaller gap for smaller screens */
+            }
+            .service {
+                width: 90%; /* Adjust width for smaller screens to be responsive */
+                height: auto; /* Height auto for better mobile responsiveness */
             }
         }
         footer {
@@ -111,6 +122,10 @@
             <div class="service">
                 <h2>Training</h2>
                 <p>Professional training to help your team get up to speed with the latest technologies.</p>
+            </div>
+            <div class="service">
+                <h2>Networking</h2>
+                <p>Secure and efficient network solutions to enhance your infrastructure.</p>
             </div>
         </div>
     </div>
