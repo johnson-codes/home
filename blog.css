@@ -1,5 +1,10 @@
 body {
     background-color: #F9F9F9; /* Ensure background color matches */
+    background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/final.svg?v=1728798935');
+    background-size: cover; /* Cover the entire page */
+    background-position: center; /* Center the image */
+    background-attachment: scroll; /* Image scrolls with content */
+    background-repeat: no-repeat; /* Do not repeat the image */
 }
 
 header {
@@ -11,7 +16,7 @@ header {
     max-width: 55%; /* Center the content */
     margin: 10px auto; /* Center horizontally and add 10px margin */
     padding: 2rem; /* Add padding */
-    background-color: white; /* White background for the content */
+    background-color: rgba(255, 255, 255, 0.75); /* White background with transparency */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
     border-radius: 8px; /* Rounded corners */
 }
@@ -54,6 +59,18 @@ h4 {
     background-color: #f0f0f0; /* Light background color */
     padding: 5px; /* Padding around the text */
     border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+h5 {
+    font-size: 1.2rem; /* Adjusted size for h5 */
+    margin-top: 1rem; /* Space above */
+    margin-bottom: 0.5rem; /* Space below */
+    color: #333; /* Color for subtitles */
+    background-color: #f0f0f0; /* Light background color */
+    padding: 5px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    display: inline-block; /* Make the background only around the text */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
@@ -102,4 +119,11 @@ nav a {
 footer {
     margin: 0; /* Remove margin above and below the footer */
     padding: 1rem 0; /* Keep padding for footer content */
+    background-color: #333; /* Ensure the footer has a background color */
+    color: #fff; /* Set text color to white for contrast */
+    width: 100%; /* Ensure the footer takes the full width */
+    display: flex; /* Use Flexbox for alignment */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    position: relative; /* Ensure proper positioning */
 }
