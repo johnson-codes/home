@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up to InsideBox</title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -16,24 +17,18 @@
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
-
-        header {
-            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/100.png?v=1728771960');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        header, footer {
+            background-color: #333;
             color: #fff;
-            padding: 1rem 0;
             text-align: center;
+            padding: 1rem 0;
         }
-
         nav {
             background-color: #444;
             color: #fff;
             padding: 1rem;
             text-align: center;
         }
-
         nav a {
             color: #fff;
             margin: 0 1rem;
@@ -44,17 +39,31 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
-
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.8);
             color: #000;
         }
-
+        .silver-line {
+            border: none;
+            height: 2px;
+            background-color: silver;
+            margin: 0;
+        }
+        header {
+            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/100.png?v=1728771960');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        /* Additional styles for signup page */
         .signup-container {
             background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increased shadow values */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
             width: 250px;
             margin: 80px auto 50px;
             height: 350px;
@@ -62,28 +71,23 @@
             flex-direction: column;
             justify-content: space-between;
         }
-
         h1, h2 {
             text-align: center;
             margin: 10px 0;
         }
-
         h1 {
             font-size: 20px;
             font-weight: 400;
         }
-
         h2 {
             font-size: 16px;
             font-weight: 300;
         }
-
         form {
             display: flex;
             flex-direction: column;
             margin-top: 20px;
         }
-
         input[type="email"], input[type="password"] {
             padding: 8px;
             margin: 5px 0;
@@ -91,7 +95,6 @@
             border-radius: 4px;
             font-size: 14px;
         }
-
         button {
             background-color: #000;
             color: white;
@@ -102,32 +105,21 @@
             font-size: 14px;
             margin-top: 15px;
         }
-
         button:hover {
-            background-color: #000;
+            background-color: #333;
         }
-
         a {
             color: #000;
             text-decoration: none;
             font-size: 12px;
         }
-
         a:hover {
             text-decoration: underline;
         }
-
         p {
             text-align: center;
             margin-top: 15px;
             font-size: 12px;
-        }
-
-        .silver-line {
-            border: none;
-            height: 2px;
-            background-color: silver;
-            margin: 0;
         }
     </style>
 </head>
@@ -158,7 +150,6 @@
         </form>
         <p>Already have an account? <a href="/signin">Sign in</a></p>
     </div>
-
     <footer>
         <p>&copy; 2024 Software Engineering Services. All rights reserved.</p>
     </footer>

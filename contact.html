@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Software Engineering Services</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-        }
-        header {
-            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/100.png?v=1728771960');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             background-repeat: no-repeat;
+        }
+        header, footer {
+            background-color: #333;
             color: #fff;
-            padding: 1rem 0;
             text-align: center;
+            padding: 1rem 0;
         }
         nav {
             background-color: #444;
@@ -31,72 +31,37 @@
             color: #fff;
             margin: 0 1rem;
             text-decoration: none;
-            font-weight: bold; /* Make font bold */
-            font-size: 1.1rem; /* Increase font size */
-            padding: 0.5rem 1rem; /* Add padding for hover effect */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
         nav a:hover {
-            background-color: rgba(255, 255, 255, 0.8); /* Light white background */
-            color: #000; /* Change text color to black */
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #000;
         }
-        .container {
-            max-width: 1600px; /* Increased max-width to accommodate wider service containers */
-            margin: 2rem auto; /* Center the container */
-            padding: 2rem;
-            padding-left: 4rem; /* Add more space on the left */
-            padding-right: 4rem; /* Add more space on the right */
-        }
-        .hero {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 8px;
-        }
-        .hero h1 {
+        .silver-line {
+            border: none;
+            height: 2px;
+            background-color: silver;
             margin: 0;
-            font-size: 2.5rem;
         }
-        .services {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem 0.1rem; /* Maintain vertical and horizontal gaps */
-            margin-top: 2rem;
-            justify-items: center;
-        }
-        .service {
-            background-color: #fff;
-            padding: 1rem;
-            border-radius: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            width: 350px; /* Increased width from 300px to 350px */
-            height: calc(350px * 0.5); /* Adjusted height to maintain 2:1 ratio */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .service h2 {
-            margin-top: 0;
-        }
-        @media (max-width: 768px) {
-            .services {
-                grid-template-columns: 1fr; /* Single column layout for smaller screens */
-                gap: 1rem; /* Smaller gap for smaller screens */
-            }
-            .service {
-                width: 90%; /* Adjust width for smaller screens to be responsive */
-                height: auto; /* Height auto for better mobile responsiveness */
-            }
-        }
-        footer {
-            background-color: #333;
+        header {
+            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/100.png?v=1728771960');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: #fff;
-            text-align: center;
             padding: 1rem 0;
-            margin-top: 2rem;
+            text-align: center;
+        }
+        /* Additional styles for contact page */
+        .hero-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .hero-image {
             width: 100%;
@@ -105,18 +70,12 @@
             object-fit: cover;
             margin-bottom: 2rem;
         }
-        .silver-line {
-            border: none;
-            height: 2px;
-            background-color: silver;
-            margin: 0;
-        }
         .hero-heading {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: rgba(192, 192, 192, 0.7); /* Updated background color with half transparency */
+            background-color: rgba(192, 192, 192, 0.7);
             padding: 1rem 2rem;
             font-size: 2rem;
             font-weight: bold;
@@ -127,12 +86,6 @@
             width: 40%;
             max-width: 200px;
             margin: 0 auto;
-        }
-        .hero-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
     </style>
 </head>
@@ -158,7 +111,7 @@
         <!-- Add your contact form or contact information here -->
     </div>
     <footer>
-        <p>&copy; 20 Software Engineering Services. All rights reserved.</p>
+        <p>&copy; 2024 Software Engineering Services. All rights reserved.</p>
     </footer>
 </body>
 </html>
