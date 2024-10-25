@@ -2,11 +2,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerDisplay = document.getElementById('timer');
     const startBtn = document.getElementById('startBtn');
     const resetBtn = document.getElementById('resetBtn');
-    const timerDuration = document.getElementById('timerDuration');
-    const customTime = document.getElementById('customTime');
+    const selectedDuration = document.getElementById('selectedDuration');
+    const durationOptions = document.getElementById('durationOptions');
 
     let countdown;
     let remainingTime = 0;
+
+    // Populate the custom select with 60 options
+    for (let i = 1; i <= 60; i++) {
+        const option = document.createElement('div');
+        option.textContent = `${i} min`;
+        option.setAttribute('data-value', i * 60); // Store seconds as data attribute
+        durationOptions.appendChild(option);
+    }
+
+    // Show/hide options
+    selectedDuration.addEventListener('click', () => {
+        durationOptions.style.display = durationOptions.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Handle option selection
+    durationOptions.addEventListener('click', (e) => {
+        if (e.target !== durationOptions) {
+            selectedDuration.textContent = e.target.textContent;
+            durationOptions.style.display = 'none';
+        }
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!e.target.matches('.custom-select-selected')) {
+            durationOptions.style.display = 'none';
+        }
+    });
 
     function displayTimeLeft(seconds) {
         const minutes = Math.floor(seconds / 60);
@@ -38,12 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startTimer() {
-        let seconds;
-        if (timerDuration.value === 'custom') {
-            seconds = parseInt(customTime.value);
-        } else {
-            seconds = parseInt(timerDuration.value);
-        }
+        const selectedOption = durationOptions.querySelector(`div[data-value="${selectedDuration.textContent.split(' ')[0] * 60}"]`);
+        const seconds = parseInt(selectedOption.getAttribute('data-value'));
         if (seconds > 0) {
             timer(seconds);
             startBtn.disabled = true;
@@ -58,12 +82,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startBtn.addEventListener('click', startTimer);
     resetBtn.addEventListener('click', resetTimer);
-
-    timerDuration.addEventListener('change', function() {
-        if (this.value === 'custom') {
-            customTime.style.display = 'inline-block';
-        } else {
-            customTime.style.display = 'none';
-        }
-    });
 });
