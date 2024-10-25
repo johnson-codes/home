@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Dictionary</title>
+    <link rel="icon" href="image/JSW.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        #search-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        #word-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        #search-btn {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 4px 4px 0;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .word-of-day {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>E-Dictionary</h1>
+        <div id="search-container">
+            <input type="text" id="word-input" placeholder="Enter a word">
+            <button id="search-btn">Search</button>
+        </div>
+        <div id="result"></div>
+        <div class="word-of-day">
+            <h3>Word of the Day</h3>
+            <p id="word-of-day"></p>
+        </div>
+    </div>
+    <script src="dictionary.js"></script>
+</body>
+</html>
