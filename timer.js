@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let countdown;
     let remainingTime = 0;
+    let audioContext;
 
     // Populate the custom select with 60 options
     for (let i = 1; i <= 60; i++) {
@@ -58,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 clearInterval(countdown);
                 timerDisplay.textContent = "Time's up!";
                 startBtn.disabled = false;
+                playAlarm();
                 return;
             }
 
@@ -78,6 +80,41 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(countdown);
         timerDisplay.textContent = '00:00';
         startBtn.disabled = false;
+    }
+
+    function playAlarm() {
+        if (!audioContext) {
+            audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        const beepLength = 0.15; // Length of each beep in seconds
+        const shortPauseLength = 0.15; // Length of short pause between beeps
+        const longPauseLength = 0.5; // Length of long pause between "di di, di di" patterns
+        const patternCount = 3; // Number of times to repeat the pattern
+
+        for (let pattern = 0; pattern < patternCount; pattern++) {
+            for (let i = 0; i < 4; i++) {
+                const startTime = audioContext.currentTime + 
+                    pattern * (4 * beepLength + 3 * shortPauseLength + longPauseLength) + 
+                    i * (beepLength + shortPauseLength);
+                
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(880, startTime); // A5 note
+
+                gainNode.gain.setValueAtTime(0, startTime);
+                gainNode.gain.linearRampToValueAtTime(1, startTime + 0.01);
+                gainNode.gain.linearRampToValueAtTime(0, startTime + beepLength);
+
+                oscillator.start(startTime);
+                oscillator.stop(startTime + beepLength);
+            }
+        }
     }
 
     startBtn.addEventListener('click', startTimer);
