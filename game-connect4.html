@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect 4</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            transform: scale(0.9); /* Changed from 0.75 to 0.9 */
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 1.5em;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr); /* Changed to 12 columns */
+            gap: 7.5px;
+            background-color: #1e90ff;
+            padding: 7.5px;
+            border-radius: 5px;
+        }
+        .cell {
+            width: 45px;
+            height: 45px;
+            background-color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Remove hover effect for cells that are already filled */
+        .cell.red, .cell.yellow {
+            cursor: not-allowed;
+        }
+
+        .cell:not(.red):not(.yellow):hover {
+            background-color: #e0e0e0;
+        }
+
+        .red {
+            background-color: #ff4136 !important;
+        }
+
+        .yellow {
+            background-color: #ffdc00 !important;
+        }
+        #status {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+        #reset {
+            display: block;
+            margin: 15px auto 0;
+            padding: 7.5px 15px;
+            font-size: 0.9em;
+            background-color: #2ecc40;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #reset:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 id="gameTitle">Connect 4</h1>
+        <div id="board"></div>
+        <div id="status">Red's turn</div>
+        <button id="reset">Reset Game</button>
+    </div>
+
+    <script>
+        const board = document.getElementById('board');
+        const status = document.getElementById('status');
+        const resetButton = document.getElementById('reset');
+        const gameTitle = document.getElementById('gameTitle');
+        let currentPlayer = 'red';
+        let gameBoard = Array(6).fill().map(() => Array(12).fill(null)); // Changed to 12 columns
+        let audioContext;
+
+        function playTurnSound() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(currentPlayer === 'red' ? 440 : 520, audioContext.currentTime);
+            
+            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.1);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.1);
+        }
+
+        function createBoard() {
+            board.innerHTML = ''; // Clear the board
+            for (let row = 0; row < 6; row++) {
+                for (let col = 0; col < 12; col++) { // Changed to 12 columns
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.col = col;
+                    cell.addEventListener('click', () => dropPiece(col));
+                    board.appendChild(cell);
+                }
+            }
+        }
+
+        function dropPiece(col) {
+            for (let row = 5; row >= 0; row--) {
+                if (!gameBoard[row][col]) {
+                    gameBoard[row][col] = currentPlayer;
+                    const cell = board.children[row * 12 + col]; // Adjusted for 12 columns
+                    
+                    // Force immediate style update
+                    cell.style.backgroundColor = currentPlayer === 'red' ? '#ff4136' : '#ffdc00';
+                    cell.classList.add(currentPlayer);
+                    
+                    playTurnSound();
+                    
+                    if (checkWin(row, col)) {
+                        const winner = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}`;
+                        gameTitle.textContent = `${winner} Wins!`;
+                        status.textContent = `${winner} wins!`;
+                        clearBoard();
+                        disableBoard();
+                    } else if (checkDraw()) {
+                        status.textContent = "It's a draw!";
+                        gameTitle.textContent = "Draw!";
+                        clearBoard();
+                    } else {
+                        currentPlayer = currentPlayer === 'red' ? 'yellow' : 'red';
+                        status.textContent = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn`;
+                    }
+                    return;
+                }
+            }
+        }
+
+        function checkWin(row, col) {
+            const directions = [
+                [0, 1], // horizontal
+                [1, 0], // vertical
+                [1, 1], // diagonal right
+                [1, -1] // diagonal left
+            ];
+            
+            return directions.some(([dx, dy]) => {
+                let count = 1;
+                // Check in positive direction
+                for (let i = 1; i < 4; i++) {
+                    const newRow = row + (dx * i);
+                    const newCol = col + (dy * i);
+                    if (newRow < 0 || newRow >= 6 || newCol < 0 || newCol >= 12 || 
+                        gameBoard[newRow][newCol] !== currentPlayer) break;
+                    count++;
+                }
+                // Check in negative direction
+                for (let i = 1; i < 4; i++) {
+                    const newRow = row - (dx * i);
+                    const newCol = col - (dy * i);
+                    if (newRow < 0 || newRow >= 6 || newCol < 0 || newCol >= 12 || 
+                        gameBoard[newRow][newCol] !== currentPlayer) break;
+                    count++;
+                }
+                return count >= 4;
+            });
+        }
+
+        function checkDraw() {
+            return gameBoard[0].every(cell => cell !== null);
+        }
+
+        function clearBoard() {
+            setTimeout(() => {
+                gameBoard = Array(6).fill().map(() => Array(12).fill(null));
+                Array.from(board.children).forEach(cell => {
+                    cell.className = 'cell';
+                    cell.style.backgroundColor = ''; // Reset inline styles
+                });
+            }, 1000); // Delay of 1 second before clearing
+        }
+
+        function disableBoard() {
+            Array.from(board.children).forEach(cell => {
+                cell.style.pointerEvents = 'none';
+            });
+        }
+
+        function resetGame() {
+            gameBoard = Array(6).fill().map(() => Array(12).fill(null));
+            Array.from(board.children).forEach(cell => {
+                cell.className = 'cell';
+                cell.style.backgroundColor = ''; // Reset inline styles
+                cell.style.pointerEvents = 'auto';
+            });
+            currentPlayer = 'red';
+            status.textContent = "Red's turn";
+            gameTitle.textContent = "Connect 4";
+        }
+
+        createBoard();
+        resetButton.addEventListener('click', resetGame);
+    </script>
+</body>
+</html>
