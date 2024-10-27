@@ -12,14 +12,28 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-image: url('image/connect4.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.3); /* Adjust opacity here */
+            z-index: -1;
         }
         .game-container {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.5); /* Adjusted transparency */
             border-radius: 40px;
             padding: 15px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            transform: scale(0.9); /* Changed from 0.75 to 0.9 */
+            transform: scale(0.9);
         }
         h1 {
             text-align: center;
@@ -28,7 +42,7 @@
         }
         #board {
             display: grid;
-            grid-template-columns: repeat(12, 1fr); /* Changed to 12 columns */
+            grid-template-columns: repeat(12, 1fr);
             gap: 7.5px;
             background-color: #1e90ff;
             padding: 7.5px;
@@ -70,8 +84,8 @@
             padding: 12px 24px;
             font-size: 1.1em;
             font-weight: bold;
-            background-color: #2196F3;
-            color: white;
+            background-color: #FFDC00; /* Changed to yellow */
+            color: #000000; /* Changed to black */
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -81,7 +95,7 @@
             letter-spacing: 1px;
         }
         #reset:hover {
-            background-color: #1976D2;
+            background-color: #FFC300; /* Darker yellow on hover */
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
@@ -105,7 +119,7 @@
         const resetButton = document.getElementById('reset');
         const gameTitle = document.getElementById('gameTitle');
         let currentPlayer = 'red';
-        let gameBoard = Array(6).fill().map(() => Array(12).fill(null)); // Changed to 12 columns
+        let gameBoard = Array(6).fill().map(() => Array(12).fill(null));
         let audioContext;
 
         function playTurnSound() {
@@ -133,7 +147,7 @@
         function createBoard() {
             board.innerHTML = ''; // Clear the board
             for (let row = 0; row < 6; row++) {
-                for (let col = 0; col < 12; col++) { // Changed to 12 columns
+                for (let col = 0; col < 12; col++) {
                     const cell = document.createElement('div');
                     cell.className = 'cell';
                     cell.dataset.col = col;
@@ -147,7 +161,7 @@
             for (let row = 5; row >= 0; row--) {
                 if (!gameBoard[row][col]) {
                     gameBoard[row][col] = currentPlayer;
-                    const cell = board.children[row * 12 + col]; // Adjusted for 12 columns
+                    const cell = board.children[row * 12 + col];
                     
                     // Force immediate style update
                     cell.style.backgroundColor = currentPlayer === 'red' ? '#ff4136' : '#ffdc00';
