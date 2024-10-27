@@ -13,14 +13,30 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-image: url('image/timer.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.66);
+            z-index: 0;
         }
         .timer-container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.7);
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         .timer-display {
             font-size: 4rem;
@@ -28,7 +44,7 @@
             color: #333;
         }
         .timer-controls button {
-            background-color: #4CAF50;
+            background-color: #7ab594; /* Darker shade as default */
             border: none;
             color: white;
             padding: 10px 20px;
@@ -42,7 +58,7 @@
             transition: background-color 0.3s;
         }
         .timer-controls button:hover {
-            background-color: #45a049;
+            background-color: #5a9474; /* Even darker shade for hover */
         }
         .timer-controls button:disabled {
             background-color: #cccccc;
