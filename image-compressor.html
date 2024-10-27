@@ -5,6 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Compressor</title>
     <link rel="stylesheet" href="image-compressor.css">
+    <style>
+        body {
+            background-image: url('image/compressbk.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 85px;
+        }
+        h1 {
+            color: black;
+        }
+        .upload-button {
+            background-color: black;
+            color: white;
+        }
+        .upload-button:hover {
+            background-color: #333;
+        }
+        #qualityValue {
+            color: black;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            background: black;
+        }
+        input[type="range"]::-moz-range-thumb {
+            background: black;
+        }
+        input[type="range"]::-ms-thumb {
+            background: black;
+        }
+        .image-info span {
+            color: black;
+        }
+        input[type="range"] {
+            accent-color: black;
+        }
+        .download-button {
+            background-color: black;
+            color: white;
+        }
+        .download-button:hover {
+            background-color: #333;
+        }
+        .upload-section {
+            transition: all 0.3s ease;
+        }
+        .upload-section:hover {
+            border-color: black;
+            background: rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
