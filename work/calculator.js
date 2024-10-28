@@ -6,35 +6,37 @@ function playSound() {
 }
 
 function appendToDisplay(value) {
-    playSound();
-    if (display.textContent === '0' && value !== '.') {
-        display.textContent = value;
+    var display = document.getElementById('display');
+    if (display.innerText === "0") {
+        display.innerText = value; // Replace the initial '0'
     } else {
-        display.textContent += value;
+        display.innerText += value; // Append value
     }
+    playSound(); // Play beep sound
 }
 
 function clearDisplay() {
-    playSound();
-    display.textContent = '0';
+    document.getElementById('display').innerText = "0";
+    playSound(); // Play beep sound
 }
 
 function calculate() {
-    playSound();
+    var display = document.getElementById('display');
     try {
-        display.textContent = eval(display.textContent);
-    } catch (error) {
-        display.textContent = 'Error';
+        display.innerText = eval(display.innerText); // Evaluate the expression
+    } catch (e) {
+        display.innerText = "Error"; // Display error on invalid input
     }
+    playSound(); // Play beep sound
 }
 
 function backspace() {
-    playSound();
-    if (display.textContent.length > 1) {
-        display.textContent = display.textContent.slice(0, -1);
-    } else {
-        display.textContent = '0';
+    var display = document.getElementById('display');
+    display.innerText = display.innerText.slice(0, -1);
+    if (display.innerText === "") {
+        display.innerText = "0"; // Ensure there's always at least '0' displayed
     }
+    playSound(); // Play beep sound
 }
 
 // Add keyboard support
