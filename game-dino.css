@@ -41,8 +41,8 @@ body {
 }
 
 .dino {
-    width: 88px;
-    height: 96px;
+    width: 66px;  /* Changed from 88px (88 * 0.75 = 66) */
+    height: 72px; /* Changed from 96px (96 * 0.75 = 72) */
     position: absolute;
     bottom: 0;
     left: 100px;  /* changed from 50px to 100px */
@@ -110,17 +110,16 @@ body {
     font-weight: bold; /* added to improve readability */
 }
 
-/* Update control button styling to be outside container */
+/* Update control button styling */
 .control-button {
-    position: static;  /* remove relative positioning */
     padding: 12px 30px;
     width: 200px;
     font-family: 'Quicksand', monospace;
     font-size: 18px;
     font-weight: bold;
-    background-color: #4CAF50;  /* changed to a nice plant green */
+    background-color: #4CAF50;
     opacity: 1;
-    color: white;  /* changed to white for better contrast */
+    color: white;
     border: none;
     border-radius: 15px;
     cursor: pointer;
@@ -129,12 +128,23 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     z-index: 10;
+    margin-top: 20px; /* Space between container and button */
 }
 
 .control-button:hover {
-    background-color: #45a049;  /* slightly darker green on hover */
+    background-color: #45a049;
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Update game wrapper to properly center everything */
+.game-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
 }
 
 @keyframes jump {
@@ -148,7 +158,7 @@ body {
     animation: jump 1.2s cubic-bezier(0.4, 0, 0.2, 1); /* increased duration from 0.8s to 1.2s */
 }
 
-/* Update the ground line */
+/* Update the ground line and add desert dots */
 .game-container::after {
     content: '';
     position: absolute;
@@ -156,15 +166,23 @@ body {
     left: 0;
     right: 0;
     height: 2px;
-    background: #535353;  /* changed from gradient to solid gray color */
+    background: #535353;
 }
 
-/* Add game wrapper styles */
-.game-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;  /* space between container and button */
+/* Add desert dots */
+.game-container::before {
+    content: '';
+    position: absolute;
+    bottom: 2px; /* Position just above the ground line */
+    left: 0;
+    right: 0;
+    height: 8px; /* Height for the dots area */
+    background-image: 
+        radial-gradient(circle, #535353 1px, transparent 1px),
+        radial-gradient(circle, #535353 1px, transparent 1px);
+    background-size: 12px 12px; /* Space between dots */
+    background-position: 0 0, 6px 4px; /* Offset for second layer of dots */
+    opacity: 0.5; /* Make the dots subtle */
 }
 
 .obstacle.tall-cactus {
