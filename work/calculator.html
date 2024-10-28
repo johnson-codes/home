@@ -14,12 +14,17 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            background-image: url('../image/calculator.png'); /* Adjust the path as necessary */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
         .calculator {
             background-color: #333;
             border-radius: 20px;
             padding: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transform: scale(0.75); /* Scale down to 75% of the original size */
         }
         .display {
             background-color: #222;
@@ -53,6 +58,8 @@
         }
         .operator {
             background-color: #ff9500;
+            font-weight: bold; /* Make text bold */
+            font-size: 1.75rem; /* Increase font size */
         }
         .operator:hover {
             background-color: #ffaa33;
@@ -72,6 +79,7 @@
     </style>
 </head>
 <body>
+    <audio id="button-sound" src="sounds/click.mp3"></audio> <!-- Verify this line -->
     <div class="calculator">
         <div class="display" id="display">0</div>
         <div class="buttons">
@@ -98,5 +106,46 @@
         </div>
     </div>
     <script src="calculator.js"></script>
+    <script>
+        // Create an audio context
+        var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function beep(duration = 100, frequency = 440, volume = 0.5) {
+            var oscillator = audioCtx.createOscillator();
+            var gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            gainNode.gain.value = volume;
+            oscillator.frequency.value = frequency;
+            oscillator.type = 'sine'; // Changed to 'sine' for a smoother sound
+
+            oscillator.start();
+            setTimeout(function() {
+                oscillator.stop();
+            }, duration);
+        }
+
+        function appendToDisplay(value) {
+            beep(); // Play beep sound
+            // Existing code to append value to display...
+        }
+
+        function clearDisplay() {
+            beep(); // Play beep sound
+            // Existing code to clear display...
+        }
+
+        function backspace() {
+            beep(); // Play beep sound
+            // Existing code for backspace...
+        }
+
+        function calculate() {
+            beep(); // Play beep sound
+            // Existing code to perform calculation...
+        }
+    </script>
 </body>
 </html>

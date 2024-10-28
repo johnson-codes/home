@@ -1,6 +1,12 @@
 let display = document.getElementById('display');
 
+function playSound() {
+    var sound = document.getElementById('button-sound');
+    sound.play();
+}
+
 function appendToDisplay(value) {
+    playSound();
     if (display.textContent === '0' && value !== '.') {
         display.textContent = value;
     } else {
@@ -9,10 +15,12 @@ function appendToDisplay(value) {
 }
 
 function clearDisplay() {
+    playSound();
     display.textContent = '0';
 }
 
 function calculate() {
+    playSound();
     try {
         display.textContent = eval(display.textContent);
     } catch (error) {
@@ -21,6 +29,7 @@ function calculate() {
 }
 
 function backspace() {
+    playSound();
     if (display.textContent.length > 1) {
         display.textContent = display.textContent.slice(0, -1);
     } else {
