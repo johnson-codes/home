@@ -12,7 +12,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('image/connect4.png');
+            background-image: url('../image/connect4.png'); /* Updated image path */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -109,39 +109,34 @@
     <div class="game-container">
         <h1 id="gameTitle">Connect 4</h1>
         <div id="board"></div>
-        <div id="status">Red's turn</div>
-        <button id="reset">Reset Game</button>
+        <div id="status">Click 'Start' to play!</div>
+        <button id="reset">Start</button> <!-- Initially set to 'Start' -->
     </div>
 
     <script>
         const board = document.getElementById('board');
         const status = document.getElementById('status');
-        const resetButton = document.getElementById('reset');
+        const gameControlButton = document.getElementById('reset');
         const gameTitle = document.getElementById('gameTitle');
         let currentPlayer = 'red';
         let gameBoard = Array(6).fill().map(() => Array(12).fill(null));
-        let audioContext;
+        let gameActive = false;
+        let audio = new Audio(`../audio/connect4.mp3`);
 
-        function playTurnSound() {
-            if (!audioContext) {
-                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        function toggleGame() {
+            gameActive = !gameActive;
+            if (gameActive) {
+                gameControlButton.textContent = 'Pause';
+                audio.play();
+                audio.loop = true;
+                status.textContent = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn`;
+                createBoard(); // Re-initialize the board with event listeners when the game starts
+            } else {
+                gameControlButton.textContent = 'Start';
+                audio.pause();
+                status.textContent = "Game paused";
+                disableBoard(); // Optionally disable board interaction when paused
             }
-            
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
-            
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(currentPlayer === 'red' ? 440 : 520, audioContext.currentTime);
-            
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.1);
-            
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.1);
         }
 
         function createBoard() {
@@ -151,34 +146,26 @@
                     const cell = document.createElement('div');
                     cell.className = 'cell';
                     cell.dataset.col = col;
-                    cell.addEventListener('click', () => dropPiece(col));
+                    if (gameActive) { // Attach event listeners only if the game is active
+                        cell.addEventListener('click', () => dropPiece(col));
+                    }
                     board.appendChild(cell);
                 }
             }
         }
 
         function dropPiece(col) {
+            if (!gameActive) return; // Prevent game interaction if not active
             for (let row = 5; row >= 0; row--) {
                 if (!gameBoard[row][col]) {
                     gameBoard[row][col] = currentPlayer;
                     const cell = board.children[row * 12 + col];
-                    
-                    // Force immediate style update
                     cell.style.backgroundColor = currentPlayer === 'red' ? '#ff4136' : '#ffdc00';
                     cell.classList.add(currentPlayer);
-                    
-                    playTurnSound();
-                    
                     if (checkWin(row, col)) {
-                        const winner = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}`;
-                        gameTitle.textContent = `${winner} Wins!`;
-                        status.textContent = `${winner} wins!`;
-                        clearBoard();
-                        disableBoard();
+                        endGame(`${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)} Wins!`);
                     } else if (checkDraw()) {
-                        status.textContent = "It's a draw!";
-                        gameTitle.textContent = "Draw!";
-                        clearBoard();
+                        endGame("It's a draw!");
                     } else {
                         currentPlayer = currentPlayer === 'red' ? 'yellow' : 'red';
                         status.textContent = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn`;
@@ -186,6 +173,21 @@
                     return;
                 }
             }
+        }
+
+        function disableBoard() {
+            Array.from(board.children).forEach(cell => {
+                cell.removeEventListener('click', () => dropPiece(cell.dataset.col)); // Remove event listeners when game is paused
+            });
+        }
+
+        function endGame(message) {
+            gameTitle.textContent = message;
+            status.textContent = message;
+            gameActive = false;
+            gameControlButton.textContent = 'Start';
+            audio.pause();
+            clearBoard();
         }
 
         function checkWin(row, col) {
@@ -232,26 +234,8 @@
             }, 1000); // Delay of 1 second before clearing
         }
 
-        function disableBoard() {
-            Array.from(board.children).forEach(cell => {
-                cell.style.pointerEvents = 'none';
-            });
-        }
-
-        function resetGame() {
-            gameBoard = Array(6).fill().map(() => Array(12).fill(null));
-            Array.from(board.children).forEach(cell => {
-                cell.className = 'cell';
-                cell.style.backgroundColor = ''; // Reset inline styles
-                cell.style.pointerEvents = 'auto';
-            });
-            currentPlayer = 'red';
-            status.textContent = "Red's turn";
-            gameTitle.textContent = "Connect 4";
-        }
-
-        createBoard();
-        resetButton.addEventListener('click', resetGame);
+        gameControlButton.addEventListener('click', toggleGame);
+        createBoard(); // Initialize the board but do not start the game
     </script>
 </body>
 </html>
