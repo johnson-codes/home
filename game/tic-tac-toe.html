@@ -12,6 +12,19 @@
     <div id="board" class="board"></div>
     <button id="resetButton">Reset Game</button>
     <audio id="clickSound" src="click.mp3"></audio>
+    <audio id="backgroundMusic" src="../audio/tic.mp3" loop></audio>
     <script src="tic-tac-toe.js"></script>
+    <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.loop = true;
+
+        // Play audio after a user interaction
+        document.body.addEventListener('click', function play() {
+            backgroundMusic.play();
+            document.body.removeEventListener('click', play); // Remove the event listener after it has been triggered
+        });
+    });
+    </script>
 </body>
 </html>
