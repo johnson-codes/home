@@ -1,58 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
     const bgMusic = document.getElementById('bgMusic');
-    bgMusic.loop = false; // Ensure looping is controlled manually
-
     const dino = document.getElementById('dino');
     const obstacle = document.getElementById('obstacle');
+    const tallCactus = document.getElementById('tallCactus');
     const scoreDisplay = document.getElementById('score');
     const controlButton = document.getElementById('controlButton');
 
     let score = 0;
-    let isPlaying = false; // Set initial state to not playing
+    let isPlaying = false;
     let isJumping = false;
     let animationId;
     let isMusicPlaying = false;
+    let currentObstacle = null;
+    let isObstacleMoving = false;
+
+    // Hide both obstacles initially
+    obstacle.style.display = 'none';
+    tallCactus.style.display = 'none';
 
     // Game control functions
     function toggleGame() {
         isPlaying = !isPlaying;
-        controlButton.textContent = isPlaying ? 'Pause' : 'Start'; // Change to 'Start' when paused
+        controlButton.textContent = isPlaying ? 'Pause' : 'Start';
         
         if (isPlaying) {
             if (!isMusicPlaying) {
                 bgMusic.play();
                 isMusicPlaying = true;
-            } else {
-                bgMusic.play(); // Continue playing from the current position
             }
             startGame();
         } else {
             pauseGame();
-            bgMusic.pause(); // Only pause the music, do not reset the time
+            bgMusic.pause();
         }
     }
 
     function pauseGame() {
         cancelAnimationFrame(animationId);
-        bgMusic.pause(); // Pause the music without resetting the time
+        bgMusic.pause();
     }
 
     function startGame() {
+        if (!currentObstacle) {
+            spawnNewObstacle();
+        }
         moveObstacle();
+    }
+
+    function spawnNewObstacle() {
+        // Hide both obstacles first
+        obstacle.style.display = 'none';
+        tallCactus.style.display = 'none';
+
+        // Select obstacle based on score
+        if (score < 300) {
+            currentObstacle = obstacle;
+        } else if (score >= 300 && score < 500) {
+            currentObstacle = Math.random() < 0.5 ? obstacle : tallCactus;
+        } else {
+            currentObstacle = tallCactus;
+        }
+
+        // Show and position the selected obstacle
+        currentObstacle.style.display = 'block';
+        currentObstacle.style.left = '100%';
+        isObstacleMoving = true;
     }
 
     // Jump function - simplified and more reliable
     function jump() {
         if (!isJumping && isPlaying) {
             isJumping = true;
-            dino.classList.remove('jump'); // Remove first to reset animation
+            dino.classList.remove('jump');
             void dino.offsetWidth; // Force reflow
             dino.classList.add('jump');
             
             setTimeout(() => {
                 dino.classList.remove('jump');
                 isJumping = false;
-            }, 1200); // changed from 800 to 1200 to match new animation duration
+            }, 1200);
         }
     }
 
@@ -61,30 +87,24 @@ document.addEventListener('DOMContentLoaded', function() {
     controlButton.addEventListener('click', toggleGame);
     document.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
-            event.preventDefault(); // Prevent page scrolling
+            event.preventDefault();
             jump();
         }
     });
 
     // Collision detection
     function checkCollision() {
+        if (!currentObstacle) return;
+        
         const dinoRect = dino.getBoundingClientRect();
-        const obstacleRect = obstacle.getBoundingClientRect();
+        const obstacleRect = currentObstacle.getBoundingClientRect();
         
         if (
             dinoRect.right > obstacleRect.left &&
             dinoRect.left < obstacleRect.right &&
             dinoRect.bottom > obstacleRect.top
         ) {
-            isPlaying = false;
-            alert(`Game Over! Score: ${score}`);
-            score = 0;
-            scoreDisplay.textContent = `Score: ${score}`;
-            obstacle.style.left = '100%';
-            controlButton.textContent = 'Start';
-            cancelAnimationFrame(animationId);
-            bgMusic.pause(); // Stop the music when the game is over
-            bgMusic.currentTime = 0; // Reset the music to the start only on game over
+            gameOver();
         }
     }
 
@@ -100,15 +120,38 @@ document.addEventListener('DOMContentLoaded', function() {
     function moveObstacle() {
         if (!isPlaying) return;
 
-        const currentLeft = parseFloat(getComputedStyle(obstacle).left);
-        
-        if (currentLeft <= -20) {
-            obstacle.style.left = '100%';
-        } else {
-            obstacle.style.left = (currentLeft - 5) + 'px';
+        if (currentObstacle && isObstacleMoving) {
+            const currentLeft = parseFloat(getComputedStyle(currentObstacle).left);
+            
+            if (currentLeft <= -20) {
+                isObstacleMoving = false;
+                currentObstacle.style.display = 'none';
+                spawnNewObstacle();
+            } else {
+                currentObstacle.style.left = `${currentLeft - 5}px`;
+            }
+
+            checkCollision();
         }
 
-        checkCollision();
         animationId = requestAnimationFrame(moveObstacle);
+    }
+
+    function gameOver() {
+        isPlaying = false;
+        alert(`Game Over! Score: ${score}`);
+        score = 0;
+        scoreDisplay.textContent = `Score: ${score}`;
+        
+        // Reset obstacles
+        obstacle.style.display = 'none';
+        tallCactus.style.display = 'none';
+        currentObstacle = null;
+        isObstacleMoving = false;
+        
+        controlButton.textContent = 'Start';
+        cancelAnimationFrame(animationId);
+        bgMusic.pause();
+        bgMusic.currentTime = 0;
     }
 });

@@ -62,7 +62,7 @@ body {
     position: absolute;
     bottom: 0;
     right: -20px;
-    background-color: #000000;  /* changed from #ff8b94 to #000000 */
+    background-color: #545151;  /* changed from #ff8b94 to #000000 */
     clip-path: polygon(
         30% 0,    
         70% 0,
@@ -165,4 +165,13 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 20px;  /* space between container and button */
+}
+
+.obstacle.tall-cactus {
+    background-image: url('path/to/tall-cactus.png'); /* Update with the correct path */
+    height: 100px; /* Assuming the original is 100px */
+    width: 50px; /* Adjust width as necessary */
+    position: absolute;
+    bottom: 0; /* Keeps it on the ground */
+    right: 100%; /* Start off-screen */
 }
