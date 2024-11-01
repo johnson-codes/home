@@ -19,26 +19,20 @@ body {
     gap: 40px;
 }
 
-.todo-input-container {
+.todo-input-container, .todo-list-container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    margin-left: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 300px;
     max-height: 80vh;
     overflow-y: auto;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.todo-list-container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    max-height: 80vh;
-    overflow-y: auto;
-    text-align: center;
+.todo-input-container:hover, .todo-list-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 h1, h2 {
@@ -61,6 +55,11 @@ input[type="text"] {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #5cb85c;
 }
 
 button {
@@ -72,6 +71,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s;
 }
 
 button:hover {

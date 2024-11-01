@@ -57,10 +57,29 @@ document.addEventListener('DOMContentLoaded', () => {
             listItem.appendChild(taskLabel);
             listItem.appendChild(deleteButton);
             if (done) listItem.classList.add('done');
-            todoList.appendChild(listItem);
+            todoList.insertBefore(listItem, todoList.firstChild);
             todoInput.value = '';
             saveTasks();
+
+            // Limit to 10 items
+            if (todoList.children.length > 10) {
+                listItem.style.display = 'none';
+            }
         }
+    };
+
+    const downloadTasks = () => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const csvContent = "data:text/csv;charset=utf-8," 
+            + tasks.map(task => `${task.text},${task.done}`).join("\n");
+        const encodedUri = encodeURI(csvContent);
+        const today = new Date().toISOString().split('T')[0];
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `${today}_todo_list.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     addTodoButton.addEventListener('click', () => addTask(todoInput.value));
@@ -74,4 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load tasks when the page loads
     loadTasks();
     displayDate();
+
+    // Add download button
+    const downloadButton = document.createElement('button');
+    downloadButton.textContent = 'Download';
+    downloadButton.addEventListener('click', downloadTasks);
+    document.querySelector('.todo-list-container').appendChild(downloadButton);
 }); 
