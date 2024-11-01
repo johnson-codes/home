@@ -35,7 +35,17 @@ body {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-h1, h2 {
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    background-color: #f1f1f1a4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+h2 {
     text-align: center;
     color: #333;
     margin-bottom: 20px;
@@ -121,6 +131,9 @@ input[type="checkbox"] {
     cursor: pointer;
     margin-right: 10px;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 input[type="checkbox"]:checked {
@@ -132,9 +145,7 @@ input[type="checkbox"]:checked::before {
     content: '✔';
     color: white;
     position: absolute;
-    top: 0;
-    left: 3px;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .delete {
