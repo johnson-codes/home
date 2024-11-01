@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
             todoInput.value = '';
             saveTasks();
 
-            // Limit to 10 items
-            if (todoList.children.length > 10) {
-                listItem.style.display = 'none';
-            }
+            // Ensure only the top 10 items are visible
+            Array.from(todoList.children).forEach((item, index) => {
+                item.style.display = index < 10 ? 'flex' : 'none';
+            });
         }
     };
 
