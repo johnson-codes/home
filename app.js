@@ -11,15 +11,34 @@ document.addEventListener('DOMContentLoaded', () => {
         dateHeader.textContent = today.toLocaleDateString(undefined, options);
     };
 
-    const addTask = () => {
-        const taskText = todoInput.value.trim();
+    const saveTasks = () => {
+        const tasks = [];
+        todoList.querySelectorAll('li').forEach(item => {
+            tasks.push({
+                text: item.querySelector('.task-label').textContent,
+                done: item.classList.contains('done')
+            });
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    };
+
+    const loadTasks = () => {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.forEach(task => {
+            addTask(task.text, task.done);
+        });
+    };
+
+    const addTask = (taskText, done = false) => {
         if (taskText !== '') {
             const listItem = document.createElement('li');
 
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
+            checkbox.checked = done;
             checkbox.addEventListener('change', () => {
                 listItem.classList.toggle('done');
+                saveTasks();
             });
 
             const taskLabel = document.createElement('span');
@@ -31,24 +50,28 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteButton.className = 'delete';
             deleteButton.addEventListener('click', () => {
                 todoList.removeChild(listItem);
+                saveTasks();
             });
 
             listItem.appendChild(checkbox);
             listItem.appendChild(taskLabel);
             listItem.appendChild(deleteButton);
+            if (done) listItem.classList.add('done');
             todoList.appendChild(listItem);
             todoInput.value = '';
+            saveTasks();
         }
     };
 
-    addTodoButton.addEventListener('click', addTask);
+    addTodoButton.addEventListener('click', () => addTask(todoInput.value));
 
     todoInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
-            addTask();
+            addTask(todoInput.value);
         }
     });
 
-    // Display the date when the page loads
+    // Load tasks when the page loads
+    loadTasks();
     displayDate();
 }); 
