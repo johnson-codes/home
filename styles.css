@@ -109,8 +109,32 @@ li.done .task-label {
 }
 
 input[type="checkbox"] {
-    transform: scale(1.2);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border: 2px solid #5cb85c;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
     margin-right: 10px;
+    outline: none;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '✔';
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 3px;
+    font-size: 16px;
 }
 
 .delete {
