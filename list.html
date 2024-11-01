@@ -3,120 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Checklist</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="blog.css">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="https://raw.githubusercontent.com/Johnson-Frontend/cursor/cf649bc033ba7d80b3fc64cce5acd6d3dd59e6b4/image/favicon.svg" type="image/png">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-        }
-        header {
-            background-image: url('https://cdn.shopify.com/s/files/1/0596/6272/9325/files/100.png?v=1728771960');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        nav {
-            background-color: #444;
-            color: #fff;
-            padding: 1rem;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        nav a:hover {
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #000;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            background-color: #e0e0e0;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            transition: background-color 0.3s;
-        }
-        li:hover {
-            background-color: #d3d3d3;
-        }
-        input[type="checkbox"] {
-            margin-right: 15px;
-            transform: scale(1.2);
-        }
-        .silver-line {
-            border: none;
-            height: 2px;
-            background-color: silver;
-            margin: 0;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <a href="index.html">
-            <img src="https://cdn.shopify.com/s/files/1/0596/6272/9325/files/000.svg?v=1728706434" alt="Software Engineering Services Logo">
-        </a>
-    </header>
-    <hr class="silver-line">
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="service.html">Services</a>
-        <a href="blogging/machine-learning.html">ML</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="signup.html">Sign Up</a>
-        <a href="list.html">Project List</a>
-    </nav>
-    <div class="container">
-        <h1>Project Checklist</h1>
-        <ul>
-            <li><input type="checkbox"> Project 1</li>
-            <li><input type="checkbox"> Project 2</li>
-            <li><input type="checkbox"> Project 3</li>
-            <!-- Add more projects as needed -->
-        </ul>
+    <div class="main-container">
+        <div class="todo-list-container">
+            <h2 id="date-header"></h2>
+            <hr class="separator">
+            <ul id="todo-list">
+                <!-- Tasks will be added here -->
+            </ul>
+        </div>
+        <div class="todo-input-container">
+            <h1>To-do List</h1>
+            <input type="text" id="todo-input" placeholder="Add a new task...">
+            <button id="add-todo">Add</button>
+        </div>
     </div>
-    <footer>
-        <p>&copy; 2024 Software Engineering Services. All rights reserved.</p>
-    </footer>
+    <script src="app.js"></script>
 </body>
 </html>
