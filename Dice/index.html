@@ -21,15 +21,23 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
+            width: 100px;
+            height: 100px;
+            position: relative;
         }
         .pip {
             width: 20px;
             height: 20px;
             background: #fff;
             border-radius: 50%;
-            margin: 5px;
-            display: inline-block;
+            position: absolute;
         }
+        .pip:nth-child(1) { top: 10px; left: 10px; }
+        .pip:nth-child(2) { top: 10px; right: 10px; }
+        .pip:nth-child(3) { top: 40px; left: 10px; }
+        .pip:nth-child(4) { top: 40px; right: 10px; }
+        .pip:nth-child(5) { bottom: 10px; left: 10px; }
+        .pip:nth-child(6) { bottom: 10px; right: 10px; }
         button {
             padding: 10px 20px;
             margin: 10px;
@@ -46,6 +54,13 @@
             font-size: 1.5em;
             margin-top: 20px;
         }
+        .dice[data-value="1"] .pip:nth-child(4) { display: block; }
+        .dice[data-value="2"] .pip:nth-child(1), .dice[data-value="2"] .pip:nth-child(6) { display: block; }
+        .dice[data-value="3"] .pip:nth-child(1), .dice[data-value="3"] .pip:nth-child(4), .dice[data-value="3"] .pip:nth-child(6) { display: block; }
+        .dice[data-value="4"] .pip:nth-child(1), .dice[data-value="4"] .pip:nth-child(2), .dice[data-value="4"] .pip:nth-child(5), .dice[data-value="4"] .pip:nth-child(6) { display: block; }
+        .dice[data-value="5"] .pip:nth-child(1), .dice[data-value="5"] .pip:nth-child(2), .dice[data-value="5"] .pip:nth-child(4), .dice[data-value="5"] .pip:nth-child(5), .dice[data-value="5"] .pip:nth-child(6) { display: block; }
+        .dice[data-value="6"] .pip { display: block; }
+        .pip { display: none; }
     </style>
 </head>
 <body>
