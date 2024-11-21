@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.dice {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    position: relative;
+}
+
+.dice .pip {
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.dice .pip:nth-child(1) { top: 10px; left: 10px; }
+.dice .pip:nth-child(2) { top: 10px; right: 10px; }
+.dice .pip:nth-child(3) { top: 40px; left: 40px; }
+.dice .pip:nth-child(4) { bottom: 10px; left: 10px; }
+.dice .pip:nth-child(5) { bottom: 10px; right: 10px; }
+.dice .pip:nth-child(6) { bottom: 40px; right: 40px; }
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+#winner {
+    font-size: 24px;
+    margin-top: 20px;
+}
