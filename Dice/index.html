@@ -37,10 +37,37 @@
         .pip:nth-child(5) { bottom: 10px; left: 10px; }
         .pip:nth-child(6) { bottom: 10px; right: 10px; }
         button {
-            display: none;
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(45deg, #326961, #000000);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: color 0.3s;
         }
         button:hover {
-            background: #0056b3;
+            background: linear-gradient(45deg, #000000, #326961);
+        }
+        #play-video:hover {
+            color: #f5f4f2;
+        }
+        #play-video.clicked {
+            color: #eeeeed;
+        }
+        #play-video, #play-video-2 {
+            display: inline-block;
+            position: relative;
+            top: 10px;
+            transform: none;
+        }
+        #play-video {
+            float: left;
+        }
+        #play-video-2 {
+            float: right;
         }
         #winner {
             display: none;
@@ -53,37 +80,114 @@
         .dice[data-value="6"] .pip { display: block; }
         .pip { display: none; }
    
-        #video-container video {
-            max-width: 50%;
+        #video-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #button-container {
+            display: flex;
+            justify-content: center; /* Center the buttons horizontally */
+            gap: 10px; /* Add a small gap between the buttons */
+            margin-top: 10px;
+        }
+        .clicked {
+            background-color: #0056b3;
+            box-shadow: 0 0 10px #0056b3;
+        }
+        #dice-video {
+            width: 66.67%;
+            height: auto;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            pointer-events: none; /* Disable interaction with the video */
         }
         #dice-video::-webkit-media-controls {
-            display: none !important;
+            display: none !important; /* Hide controls in WebKit browsers */
         }
         #dice-video::-moz-media-controls {
-            display: none !important;
+            display: none !important; /* Hide controls in Firefox */
         }
         #dice-video::-ms-media-controls {
-            display: none !important;
+            display: none !important; /* Hide controls in Internet Explorer */
         }
-        #dice-video::-o-media-controls {
-            display: none !important;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
-        #dice-video::-khtml-media-controls {
-            display: none !important;
+        @keyframes shrink-grow {
+            0% {
+                transform: scale(1);
+                background: linear-gradient(45deg, #326961, #000000);
+            }
+            50% {
+                transform: scale(1.1);
+                background: linear-gradient(45deg, #000000, #326961);
+            }
+            100% {
+                transform: scale(1);
+                background: linear-gradient(45deg, #326961, #000000);
+            }
+        }
+        @keyframes highlight {
+            0% {
+                background: linear-gradient(45deg, #326961, #000000);
+                color: #fff;
+            }
+            100% {
+                background: linear-gradient(45deg, #FFD700, #FFA500);
+                color: #000;
+            }
+        }
+        .bounce {
+            animation: bounce 2s infinite, shrink-grow 2s infinite;
+            background: linear-gradient(45deg, #FFD700, #FFA500) !important;
+            color: #000 !important;
+        }
+        .highlight {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
         }
     </style>
 </head>
 <body>
     <div id="video-container">
-        <video id="dice-video" src="../video/11.mp4" controls controlsList="nodownload"></video>
-        <button id="play-video">Roll Video</button>
+        <video id="dice-video" src="../video/11.mp4" controls controlsList="nodownload noplaybackrate nodownload" disablePictureInPicture></video>
+        <div id="button-container">
+            <button id="play-video" class="highlight">Player One' Roll</button>
+            <button id="play-video-2">Player Two' Roll</button>
+        </div>
     </div>
     <script src="script.js"></script>
     <script>
+        document.getElementById('play-video').classList.add('highlight');
         document.getElementById('play-video').addEventListener('click', function() {
             var video = document.getElementById('dice-video');
             video.play();
+            this.classList.add('clicked');
+            this.classList.remove('highlight');
+            video.onended = function() {
+                var playVideo2 = document.getElementById('play-video-2');
+                playVideo2.classList.add('bounce');
+                playVideo2.addEventListener('click', function() {
+                    video.play();
+                    this.classList.add('clicked');
+                    this.classList.remove('bounce');
+                    setTimeout(() => this.classList.remove('clicked'), 1000);
+                    video.onended = function() {
+                        playVideo2.classList.remove('bounce');
+                    };
+                }, { once: true });
+            };
+            setTimeout(() => this.classList.remove('clicked'), 1000);
         });
     </script>
 </body>
