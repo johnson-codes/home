@@ -14,16 +14,14 @@
             color: #fff;
             text-align: center;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .dice {
-            display: inline-block;
-            margin: 20px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-            width: 100px;
-            height: 100px;
-            position: relative;
+            display: none;
         }
         .pip {
             width: 20px;
@@ -39,20 +37,13 @@
         .pip:nth-child(5) { bottom: 10px; left: 10px; }
         .pip:nth-child(6) { bottom: 10px; right: 10px; }
         button {
-            padding: 10px 20px;
-            margin: 10px;
-            background: #007BFF;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
+            display: none;
         }
         button:hover {
             background: #0056b3;
         }
         #winner {
-            font-size: 1.5em;
-            margin-top: 20px;
+            display: none;
         }
         .dice[data-value="1"] .pip:nth-child(4) { display: block; }
         .dice[data-value="2"] .pip:nth-child(1), .dice[data-value="2"] .pip:nth-child(6) { display: block; }
@@ -61,44 +52,33 @@
         .dice[data-value="5"] .pip:nth-child(1), .dice[data-value="5"] .pip:nth-child(2), .dice[data-value="5"] .pip:nth-child(4), .dice[data-value="5"] .pip:nth-child(5), .dice[data-value="5"] .pip:nth-child(6) { display: block; }
         .dice[data-value="6"] .pip { display: block; }
         .pip { display: none; }
-        #video-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 20px;
-        }
+   
         #video-container video {
-            max-width: 100%;
+            max-width: 50%;
             border-radius: 10px;
+        }
+        #dice-video::-webkit-media-controls {
+            display: none !important;
+        }
+        #dice-video::-moz-media-controls {
+            display: none !important;
+        }
+        #dice-video::-ms-media-controls {
+            display: none !important;
+        }
+        #dice-video::-o-media-controls {
+            display: none !important;
+        }
+        #dice-video::-khtml-media-controls {
+            display: none !important;
         }
     </style>
 </head>
 <body>
-    <div id="player1-dice" class="dice" data-value="0">
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-    </div>
-    <div id="player2-dice" class="dice" data-value="0">
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-        <div class="pip"></div>
-    </div>
-    <p id="turn-prompt">Player 1's turn</p>
-    <button id="player1-roll">Player 1 Roll</button>
-    <button id="player2-roll" style="display: none;">Player 2 Roll</button>
     <div id="video-container">
-        <video id="dice-video" src="../video/11.mp4" controls></video>
+        <video id="dice-video" src="../video/11.mp4" controls controlsList="nodownload"></video>
         <button id="play-video">Roll Video</button>
     </div>
-    <p id="winner"></p>
     <script src="script.js"></script>
     <script>
         document.getElementById('play-video').addEventListener('click', function() {
