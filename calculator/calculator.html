@@ -164,6 +164,17 @@
             function navigateTo(url) {
                 window.location.href = url;
             }
+
+            // Add event listeners to option buttons for redirection
+            const optionButtons = document.querySelectorAll('.option-button');
+            optionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetUrl = this.getAttribute('data-url'); // Assuming you set data-url attribute
+                    if (targetUrl) {
+                        navigateTo(targetUrl);
+                    }
+                });
+            });
         });
     </script>
 </body>

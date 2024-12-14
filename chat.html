@@ -32,9 +32,9 @@
                 </div>
             </div>
             <div class="chat-options">
-                <button class="option-button" onclick="navigateTo('https://www.johnsonmarketer.com')">Back to Home</button>
-                <button class="option-button" onclick="navigateTo('https://projects.johnsonmarketer.com')">Back to Project Checklist</button>
-                <button class="option-button" onclick="navigateTo('https://shortcuts.johnsonmarketer.com')">Back to Shortcuts</button>
+                <button class="option-button" data-url="https://www.johnsonmarketer.com">Back to Home</button>
+                <button class="option-button" data-url="https://projects.johnsonmarketer.com">Back to Project Checklist</button>
+                <button class="option-button" data-url="https://shortcuts.johnsonmarketer.com">Back to Shortcuts</button>
             </div>
         </div>
     </div>
@@ -48,11 +48,18 @@
             chatButton.addEventListener('click', function() {
                 chatContainer.classList.toggle('active');
             });
-        });
 
-        function navigateTo(url) {
-            window.location.href = url;
-        }
+            // Add event listeners to option buttons for redirection
+            const optionButtons = document.querySelectorAll('.option-button');
+            optionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetUrl = this.getAttribute('data-url');
+                    if (targetUrl) {
+                        window.location.href = targetUrl; // Redirect to the URL
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
