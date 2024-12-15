@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect 4</title>
     <link rel="icon" href="https://raw.githubusercontent.com/Johnson-Frontend/home/73ef0409f814e0cff4593a2fb9492b8f7d948079/image/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../chat.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -112,6 +113,10 @@
         <div id="board"></div>
         <div id="status">Click 'Start' to play!</div>
         <button id="reset">Start</button> <!-- Initially set to 'Start' -->
+    </div>
+
+    <div class="chat-widget" id="chatWidget">
+        <!-- Chat content will be loaded here -->
     </div>
 
     <script>
@@ -237,6 +242,14 @@
 
         gameControlButton.addEventListener('click', toggleGame);
         createBoard(); // Initialize the board but do not start the game
+
+        // Load chat.html content into the chat widget
+        fetch('../chat.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('chatWidget').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading chat:', error));
     </script>
 </body>
 </html>
