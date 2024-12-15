@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Modern Calculator</title>
+    <link rel="stylesheet" href="../chat.css">
     <link rel="icon" href="https://raw.githubusercontent.com/Johnson-Frontend/home/73ef0409f814e0cff4593a2fb9492b8f7d948079/image/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../chat.css">
     <style>
@@ -107,7 +108,53 @@
             <button class="equals" onclick="calculate()">=</button>
         </div>
     </div>
+  <!-- Chat widget -->
+  <div id="chatContainer"></div>
 
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          // Focus on the input field when the page loads
+          const todoInput = document.getElementById('todo-input');
+          if (todoInput) {
+              todoInput.focus();
+          }
+
+          // Load chat widget HTML
+          fetch('../chat.html')
+              .then(response => response.text())
+              .then(data => {
+                  document.getElementById('chatContainer').innerHTML = data;
+                  // Initialize chat widget functionality
+                  const chatButton = document.getElementById('chatButton');
+                  const chatContainer = document.querySelector('.chat-container');
+                  const closeChat = document.getElementById('closeChat');
+
+                  if (chatButton) {
+                      chatButton.addEventListener('click', function() {
+                          chatContainer.classList.toggle('active');
+                          console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
+                      });
+                  } else {
+                      console.error('Chat button not found!');
+                  }
+
+                  if (closeChat) {
+                      closeChat.addEventListener('click', function() {
+                          chatContainer.classList.remove('active');
+                          console.log('Close chat button clicked');
+                      });
+                  } else {
+                      console.error('Close chat button not found!');
+                  }
+              })
+              .catch(error => console.error('Error loading chat widget:', error));
+      });
+
+      function navigateTo(url) {
+          window.location.href = url;
+      }
+
+   </script>
     
     <script src="calculator.js"></script>
     <script>
@@ -131,52 +178,7 @@
             }, duration);
         }
     </script>
-    <div id="chat-widget-placeholder"></div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load chat.html content
-            fetch('../chat.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('chat-widget-placeholder').innerHTML = data;
-
-                    // Set up event listeners after the chat widget is loaded
-                    const chatButton = document.getElementById('chatButton');
-                    const chatContainer = document.getElementById('chatContainer');
-
-                    if (chatButton && chatContainer) {
-                        // Toggle chat container visibility
-                        chatButton.addEventListener('click', function() {
-                            chatContainer.classList.toggle('active');
-                        });
-                    }
-                })
-                .catch(error => console.error('Error loading chat widget:', error));
-
-            // Existing JavaScript code
-            const todoInput = document.getElementById('todo-input');
-            if (todoInput) {
-                todoInput.focus();
-            }
-
-            // Function to navigate to a URL
-            function navigateTo(url) {
-                window.location.href = url;
-            }
-
-            // Add event listeners to option buttons for redirection
-            const optionButtons = document.querySelectorAll('.option-button');
-            optionButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const targetUrl = this.getAttribute('data-url'); // Assuming you set data-url attribute
-                    if (targetUrl) {
-                        navigateTo(targetUrl);
-                    }
-                });
-            });
-        });
-    </script>
+    
 </body>
 </html> 
 
