@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converter</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../chat.css">
 </head>
 <body>
     <div class="container">
@@ -20,6 +21,53 @@
         <button id="convertButton">Convert</button>
         <p id="result">Result: </p>
     </div>
+      <!-- Chat widget -->
+      <div id="chatContainer"></div>
+
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              // Focus on the input field when the page loads
+              const todoInput = document.getElementById('todo-input');
+              if (todoInput) {
+                  todoInput.focus();
+              }
+  
+              // Load chat widget HTML
+              fetch('../chat.html')
+                  .then(response => response.text())
+                  .then(data => {
+                      document.getElementById('chatContainer').innerHTML = data;
+                      // Initialize chat widget functionality
+                      const chatButton = document.getElementById('chatButton');
+                      const chatContainer = document.querySelector('.chat-container');
+                      const closeChat = document.getElementById('closeChat');
+  
+                      if (chatButton) {
+                          chatButton.addEventListener('click', function() {
+                              chatContainer.classList.toggle('active');
+                              console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
+                          });
+                      } else {
+                          console.error('Chat button not found!');
+                      }
+  
+                      if (closeChat) {
+                          closeChat.addEventListener('click', function() {
+                              chatContainer.classList.remove('active');
+                              console.log('Close chat button clicked');
+                          });
+                      } else {
+                          console.error('Close chat button not found!');
+                      }
+                  })
+                  .catch(error => console.error('Error loading chat widget:', error));
+          });
+  
+          function navigateTo(url) {
+              window.location.href = url;
+          }
+ 
+       </script>
     <script src="script.js"></script>
 </body>
 </html>
