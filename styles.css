@@ -40,7 +40,7 @@ h1 {
     color: #333;
     margin-bottom: 20px;
     font-size: 1.5rem;
-    background-color: #f1f1f1a4;
+    background-color: #f1f1f1a4 !important;
     padding: 10px;
     border-radius: 5px;
 }
