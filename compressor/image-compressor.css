@@ -12,12 +12,36 @@ body {
     justify-content: center;
     align-items: center;
     color: #2d3748;
+    background-image: url('/image/compressbk.png'); /* Adjust the path as necessary */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the last value (0.5) to change opacity */
+    z-index: -1;
 }
 
 .container {
     width: 100%;
     max-width: 426px;
     padding: 16px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 85px;
+    position: relative;
+    z-index: 1;
 }
 
 .compressor-wrapper {
@@ -30,7 +54,7 @@ body {
 
 h1 {
     text-align: center;
-    color: #1a73e8;
+    color: black;
     margin-bottom: 22px;
     font-size: 1.36rem;
     font-weight: 600;
@@ -46,14 +70,14 @@ h1 {
 }
 
 .upload-section:hover {
-    border-color: #1a73e8;
-    background: rgba(26, 115, 232, 0.05);
+    border-color: black;
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .upload-button {
     display: inline-block;
     padding: 7px 15px;
-    background: #1a73e8;
+    background: black;
     color: white;
     border-radius: 6px;
     cursor: pointer;
@@ -107,7 +131,7 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 10px;
     height: 10px;
-    background: #1a73e8;
+    background: black;
     border-radius: 50%;
 }
 
@@ -117,7 +141,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 #qualityValue {
     font-weight: 600;
-    color: #1a73e8;
+    color: black;
     min-width: 32px;
     text-align: right;
     font-size: 0.72rem;
@@ -151,7 +175,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .image-info span {
-    color: #1a73e8;
+    color: black;
     font-weight: 600;
     margin-left: 5px;
 }
@@ -203,16 +227,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .download-button {
-    background: #1a73e8;
+    background: black;
     color: white;
     box-shadow: 0 2px 6px rgba(26, 115, 232, 0.2);
 }
 
-.compress-button:hover:not(:disabled),
 .download-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 13px rgba(26, 115, 232, 0.3);
-    background: #1557b0;
+    background-color: #333;
 }
 
 /* Add animation for preview image */

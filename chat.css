@@ -67,7 +67,6 @@
     flex-grow: 1;
     padding: 15px;
     overflow-y: auto;
-    background-color: rgba(249, 249, 249, 0.6);
 }
 
 .message {
@@ -80,8 +79,6 @@
 }
 
 .message.bot {
-    background: rgba(255, 255, 255, 0.9) !important;
-    background-color: rgb(240, 242, 244) !important;
     
     margin-right: auto !important;
     border-radius: 0 15px 15px 15px !important;

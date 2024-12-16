@@ -4,80 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Compressor</title>
-    <link rel="stylesheet" href="../chat.css">
     <link rel="stylesheet" href="image-compressor.css">
+    <link rel="stylesheet" href="../chat.css">
+
     <link rel="icon" href="https://raw.githubusercontent.com/Johnson-Frontend/home/73ef0409f814e0cff4593a2fb9492b8f7d948079/image/favicon.svg" type="image/svg+xml">
-    <style>
-        body {
-            background-image: url('/image/compressbk.png'); /* Adjust the path as necessary */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            position: relative;
-        }
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.5); /* Adjust the last value (0.5) to change opacity */
-            z-index: -1;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 85px;
-            position: relative;
-            z-index: 1;
-        }
-        h1 {
-            color: black;
-        }
-        .upload-button {
-            background-color: black;
-            color: white;
-        }
-        .upload-button:hover {
-            background-color: #333;
-        }
-        #qualityValue {
-            color: black;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            background: black;
-        }
-        input[type="range"]::-moz-range-thumb {
-            background: black;
-        }
-        input[type="range"]::-ms-thumb {
-            background: black;
-        }
-        .image-info span {
-            color: black;
-        }
-        input[type="range"] {
-            accent-color: black;
-        }
-        .download-button {
-            background-color: black;
-            color: white;
-        }
-        .download-button:hover {
-            background-color: #333;
-        }
-        .upload-section {
-            transition: all 0.3s ease;
-        }
-        .upload-section:hover {
-            border-color: black;
-            background: rgba(0, 0, 0, 0.05);
-        }
-    </style>
+ 
+
 </head>
 <body>
     <div class="container">
