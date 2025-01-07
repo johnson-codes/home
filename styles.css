@@ -10,7 +10,24 @@ body {
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    position: relative; /* Enable the use of pseudo-elements */
+
+    /* Fallback background color in case the image fails to load */
+    background-color: #f5f5f5;
 }
+
+/* Add a pseudo-element overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the opacity of the overlay */
+    z-index: -1; /* Keep it behind the content */
+}
+
 
 .main-container {
     display: flex;
@@ -166,4 +183,18 @@ li:hover .delete {
 
 .delete:hover {
     color: red;
+}
+
+.message-container {
+    background-image: url('image/dic.png');
+    background-size: cover;
+    background-position: center;
+    color: black; /* Change text color to black */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    margin: 20px;
+    opacity: 1; /* Changed opacity to full visibility */
+    line-height: 1.6; /* Increase line height for more space between lines */
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust this value for less transparency */
 } 
