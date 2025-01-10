@@ -26,10 +26,10 @@ header {
     vertical-align: middle; /* Align image vertically */
 }
 .nav-logo {
+    margin-left: 30px; /* Gently pushes logo to the right by 30px */
     display: flex;
     align-items: center;
-    margin-right: 20px;
-    margin-left: -50px; /* You can remove or adjust if desired */
+    margin-right: 20px; /* Keep other settings the same */
 }
 .nav-logo:hover {
     transform: scale(1.05);
