@@ -17,34 +17,48 @@
     margin: 0;
     position: relative;
     background-color: #f5f5f5; /* Fallback color */
+
+    /* ADD THESE PROPERTIES */
+    min-height: 100vh;          /* Make body at least full screen height */
+    display: flex;             /* Enable flex layout */
+    flex-direction: column;    /* Stack content vertically */
 ">
 
-    <!-- Container for loading header.html -->
+    <!-- Container for loading header.html (stays at top) -->
     <div id="header-container"></div>
 
+    <!-- Main content container, taking remaining space and centering items -->
     <div style="
-        margin: 20px;
-        background-image: url('image/dic.png');
-        background-size: cover;
-        background-position: center;
-        color: black;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        opacity: 1;
-        line-height: 1.6;
-        background-color: rgba(255, 255, 255, 0.8);
-        font-size: 20px;
+        flex: 1;                 /* Push this to fill vertical space */
+        display: flex;           /* Enable flex on this container */
+        align-items: center;     /* Center vertically */
+        justify-content: center; /* Center horizontally */
     ">
-        <p>
-            Project nearly done! Reach out for a demo 
-            <a 
-                href="mailto:johnsonmarketer@outlook.com" 
-                style="text-decoration: underline; color: inherit;"
-            >
-                HERE
-            </a>. Thanks! 😊
-        </p>
+        <!-- Paragraph container -->
+        <div style="
+            margin: 20px;
+            background-image: url('image/dic.png');
+            background-size: cover;
+            background-position: center;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            opacity: 1;
+            line-height: 1.6;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+        ">
+            <p>
+                Project nearly done! Reach out for a demo 
+                <a 
+                    href="mailto:johnsonmarketer@outlook.com" 
+                    style="text-decoration: underline; color: inherit;"
+                >
+                    HERE
+                </a>. Thanks! 😊
+            </p>
+        </div>
     </div>
 
     <!-- Chat widget -->
