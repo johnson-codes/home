@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connect 4</title>
+
+    <!-- 1) Load header.css as before -->
+    <link rel="stylesheet" href="../header.css">
+
     <link rel="icon" href="https://raw.githubusercontent.com/Johnson-Frontend/home/73ef0409f814e0cff4593a2fb9492b8f7d948079/image/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../chat.css">
+
+    <!-- Inline style overrides to fix header at the top -->
     <style>
+        /* Pin the header at the very top */
+        #header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999; /* Keep it above everything */
+        }
+
+        /* Push the .game-container down so it doesn't hide behind header */
+        .game-container {
+            margin-top: 100px; /* Adjust this to match header’s height */
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -14,24 +34,25 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-image: url('../image/connect4.png'); /* Updated image path */
+            background-image: url('../image/connect4.png');
+            background-color: rgba(255, 255, 255, 0.6);
+
+
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             position: relative;
         }
         body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(255, 255, 255, 0.3); /* Adjust opacity here */
-            z-index: -1;
-        }
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.6); /* More visible overlay */
+  z-index: -1;
+}
+
         .game-container {
-            background-color: rgba(255, 255, 255, 0.5); /* Adjusted transparency */
+            background-color: rgba(255, 255, 255, 0.5);
             border-radius: 40px;
             padding: 15px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -57,20 +78,15 @@
             border-radius: 50%;
             cursor: pointer;
         }
-
-        /* Remove hover effect for cells that are already filled */
         .cell.red, .cell.yellow {
             cursor: not-allowed;
         }
-
         .cell:not(.red):not(.yellow):hover {
             background-color: #e0e0e0;
         }
-
         .red {
             background-color: #ff4136 !important;
         }
-
         .yellow {
             background-color: #ffdc00 !important;
         }
@@ -86,8 +102,8 @@
             padding: 12px 24px;
             font-size: 1.1em;
             font-weight: bold;
-            background-color: #FFDC00; /* Changed to yellow */
-            color: #000000; /* Changed to black */
+            background-color: #FFDC00;
+            color: #000000;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -97,7 +113,7 @@
             letter-spacing: 1px;
         }
         #reset:hover {
-            background-color: #FFC300; /* Darker yellow on hover */
+            background-color: #FFC300;
             transform: translateY(-2px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
         }
@@ -108,63 +124,61 @@
     </style>
 </head>
 <body>
+    <!-- 2) Header container where header.html is injected -->
+    <div id="header-container"></div>
+
     <div class="game-container">
         <h1 id="gameTitle">Connect 4</h1>
         <div id="board"></div>
         <div id="status">Click 'Start' to play!</div>
-        <button id="reset">Start</button> <!-- Initially set to 'Start' -->
+        <button id="reset">Start</button>
     </div>
 
-                 <!-- Chat widget -->
-                 <div id="chatContainer"></div>
-
-                 <script>
-                     document.addEventListener('DOMContentLoaded', function() {
-                         // Focus on the input field when the page loads
-                         const todoInput = document.getElementById('todo-input');
-                         if (todoInput) {
-                             todoInput.focus();
-                         }
-             
-                         // Load chat widget HTML
-                         fetch('../chat.html')
-                             .then(response => response.text())
-                             .then(data => {
-                                 document.getElementById('chatContainer').innerHTML = data;
-                                 // Initialize chat widget functionality
-                                 const chatButton = document.getElementById('chatButton');
-                                 const chatContainer = document.querySelector('.chat-container');
-                                 const closeChat = document.getElementById('closeChat');
-             
-                                 if (chatButton) {
-                                     chatButton.addEventListener('click', function() {
-                                         chatContainer.classList.toggle('active');
-                                         console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
-                                     });
-                                 } else {
-                                     console.error('Chat button not found!');
-                                 }
-             
-                                 if (closeChat) {
-                                     closeChat.addEventListener('click', function() {
-                                         chatContainer.classList.remove('active');
-                                         console.log('Close chat button clicked');
-                                     });
-                                 } else {
-                                     console.error('Close chat button not found!');
-                                 }
-                             })
-                             .catch(error => console.error('Error loading chat widget:', error));
-                     });
-             
-                     function navigateTo(url) {
-                         window.location.href = url;
-                     }
-                    </script>
-
-                     
+    <!-- Chat widget container -->
+    <div id="chatContainer"></div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch header.html and inject
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Load chat widget
+            fetch('../chat.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('chatContainer').innerHTML = data;
+                    // Initialize chat widget functionality
+                    const chatButton = document.getElementById('chatButton');
+                    const chatContainer = document.querySelector('.chat-container');
+                    const closeChat = document.getElementById('closeChat');
+
+                    if (chatButton) {
+                        chatButton.addEventListener('click', function() {
+                            chatContainer.classList.toggle('active');
+                            console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
+                        });
+                    }
+
+                    if (closeChat) {
+                        closeChat.addEventListener('click', function() {
+                            chatContainer.classList.remove('active');
+                            console.log('Close chat button clicked');
+                        });
+                    }
+                })
+                .catch(error => console.error('Error loading chat widget:', error));
+        });
+
+        // Connect 4 logic below...
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
         const board = document.getElementById('board');
         const status = document.getElementById('status');
         const gameControlButton = document.getElementById('reset');
@@ -180,24 +194,24 @@
                 gameControlButton.textContent = 'Pause';
                 audio.play();
                 audio.loop = true;
-                status.textContent = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn`;
-                createBoard(); // Re-initialize the board with event listeners when the game starts
+                status.textContent = `${capitalize(currentPlayer)}'s turn`;
+                createBoard();
             } else {
                 gameControlButton.textContent = 'Start';
                 audio.pause();
                 status.textContent = "Game paused";
-                disableBoard(); // Optionally disable board interaction when paused
+                disableBoard();
             }
         }
 
         function createBoard() {
-            board.innerHTML = ''; // Clear the board
+            board.innerHTML = '';
             for (let row = 0; row < 6; row++) {
                 for (let col = 0; col < 12; col++) {
                     const cell = document.createElement('div');
                     cell.className = 'cell';
                     cell.dataset.col = col;
-                    if (gameActive) { // Attach event listeners only if the game is active
+                    if (gameActive) {
                         cell.addEventListener('click', () => dropPiece(col));
                     }
                     board.appendChild(cell);
@@ -205,31 +219,31 @@
             }
         }
 
+        function disableBoard() {
+            Array.from(board.children).forEach(cell => {
+                cell.removeEventListener('click', () => dropPiece(cell.dataset.col));
+            });
+        }
+
         function dropPiece(col) {
-            if (!gameActive) return; // Prevent game interaction if not active
+            if (!gameActive) return;
             for (let row = 5; row >= 0; row--) {
                 if (!gameBoard[row][col]) {
                     gameBoard[row][col] = currentPlayer;
                     const cell = board.children[row * 12 + col];
-                    cell.style.backgroundColor = currentPlayer === 'red' ? '#ff4136' : '#ffdc00';
+                    cell.style.backgroundColor = (currentPlayer === 'red') ? '#ff4136' : '#ffdc00';
                     cell.classList.add(currentPlayer);
                     if (checkWin(row, col)) {
-                        endGame(`${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)} Wins!`);
+                        endGame(`${capitalize(currentPlayer)} Wins!`);
                     } else if (checkDraw()) {
                         endGame("It's a draw!");
                     } else {
-                        currentPlayer = currentPlayer === 'red' ? 'yellow' : 'red';
-                        status.textContent = `${currentPlayer.charAt(0).toUpperCase() + currentPlayer.slice(1)}'s turn`;
+                        currentPlayer = (currentPlayer === 'red') ? 'yellow' : 'red';
+                        status.textContent = `${capitalize(currentPlayer)}'s turn`;
                     }
                     return;
                 }
             }
-        }
-
-        function disableBoard() {
-            Array.from(board.children).forEach(cell => {
-                cell.removeEventListener('click', () => dropPiece(cell.dataset.col)); // Remove event listeners when game is paused
-            });
         }
 
         function endGame(message) {
@@ -243,32 +257,31 @@
 
         function checkWin(row, col) {
             const directions = [
-                [0, 1], // horizontal
-                [1, 0], // vertical
-                [1, 1], // diagonal right
-                [1, -1] // diagonal left
+                [0, 1],  // horizontal
+                [1, 0],  // vertical
+                [1, 1],  // diagonal right
+                [1, -1]  // diagonal left
             ];
-            
             return directions.some(([dx, dy]) => {
                 let count = 1;
-                // Check in positive direction
                 for (let i = 1; i < 4; i++) {
-                    const newRow = row + (dx * i);
-                    const newCol = col + (dy * i);
-                    if (newRow < 0 || newRow >= 6 || newCol < 0 || newCol >= 12 || 
-                        gameBoard[newRow][newCol] !== currentPlayer) break;
+                    const r = row + dx * i;
+                    const c = col + dy * i;
+                    if (!inBounds(r, c) || gameBoard[r][c] !== currentPlayer) break;
                     count++;
                 }
-                // Check in negative direction
                 for (let i = 1; i < 4; i++) {
-                    const newRow = row - (dx * i);
-                    const newCol = col - (dy * i);
-                    if (newRow < 0 || newRow >= 6 || newCol < 0 || newCol >= 12 || 
-                        gameBoard[newRow][newCol] !== currentPlayer) break;
+                    const r = row - dx * i;
+                    const c = col - dy * i;
+                    if (!inBounds(r, c) || gameBoard[r][c] !== currentPlayer) break;
                     count++;
                 }
-                return count >= 4;
+                return (count >= 4);
             });
+        }
+
+        function inBounds(r, c) {
+            return (r >= 0 && r < 6 && c >= 0 && c < 12);
         }
 
         function checkDraw() {
@@ -280,21 +293,17 @@
                 gameBoard = Array(6).fill().map(() => Array(12).fill(null));
                 Array.from(board.children).forEach(cell => {
                     cell.className = 'cell';
-                    cell.style.backgroundColor = ''; // Reset inline styles
+                    cell.style.backgroundColor = '';
                 });
-            }, 1000); // Delay of 1 second before clearing
+            }, 1000);
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
         gameControlButton.addEventListener('click', toggleGame);
-        createBoard(); // Initialize the board but do not start the game
-
-        // Load chat.html content into the chat widget
-        fetch('../chat.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('chatWidget').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading chat:', error));
+        createBoard();
     </script>
 </body>
 </html>
