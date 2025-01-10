@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../chat.css">
+    <link rel="stylesheet" href="../header.css">
     <title>Project Status</title>
 </head>
 <body style="
@@ -13,16 +14,16 @@
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-    overflow: hidden;
     position: relative;
     background-color: #f5f5f5; /* Fallback color */
 ">
+
+    <!-- Container for loading header.html -->
+    <div id="header-container"></div>
+
     <div style="
+        margin: 20px;
         background-image: url('image/dic.png');
         background-size: cover;
         background-position: center;
@@ -30,21 +31,36 @@
         padding: 20px;
         border-radius: 10px;
         text-align: center;
-        margin: 20px;
         opacity: 1;
         line-height: 1.6;
         background-color: rgba(255, 255, 255, 0.8);
         font-size: 20px;
     ">
-<p>
-    Project nearly done! Reach out for a demo <a href="mailto:johnsonmarketer@outlook.com" style="text-decoration: underline; color: inherit;">HERE</a>. Thanks! 😊
-</p>
-</div>
+        <p>
+            Project nearly done! Reach out for a demo 
+            <a 
+                href="mailto:johnsonmarketer@outlook.com" 
+                style="text-decoration: underline; color: inherit;"
+            >
+                HERE
+            </a>. Thanks! 😊
+        </p>
+    </div>
 
-  <!-- Chat widget -->
-  <div id="chatContainer"></div>
+    <!-- Chat widget -->
+    <div id="chatContainer"></div>
 
-  <script>
+    <script>
+      // Load header.html and insert it into the header-container
+      document.addEventListener('DOMContentLoaded', function() {
+          fetch('../header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+      });
+
       document.addEventListener('DOMContentLoaded', function() {
           // Focus on the input field when the page loads
           const todoInput = document.getElementById('todo-input');
@@ -86,10 +102,7 @@
       function navigateTo(url) {
           window.location.href = url;
       }
-
-   </script>
-
-
+    </script>
 
 </body>
 </html>
