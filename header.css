@@ -69,7 +69,7 @@ nav a {
     margin: 0 0.5rem;
     text-decoration: none;
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 1rem;
     padding: 0.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
