@@ -1,3 +1,10 @@
+/* 
+   Keep all existing styles. 
+   The only changes: removed margin-left from main nav,
+   and added a rule for the inner nav to center it.
+*/
+
+/* Header background, etc. (unchanged) */
 header {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     padding: 1.5rem 0;
@@ -8,70 +15,7 @@ header {
     height: auto; /* Ensure header height is auto */
 }
 
-.nav-logo a {
-    display: inline-block; /* Ensure the anchor tag does not affect the layout */
-}
-
-.nav-logo img {
-    max-width: 45px;
-    margin-right: 10px;
-    transition: transform 0.5s ease;
-    vertical-align: middle; /* Align image vertically */
-}
-
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    margin-left: 145px;
-}
-
-.nav-logo {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-    margin-left: -50px;
-}
-
-.nav-logo:hover {
-    transform: scale(1.05);
-}
-
-.nav-logo img {
-    max-width: 45px;
-    margin-right: 10px;
-    transition: transform 0.5s ease;
-}
-
-.nav-logo:hover img {
-    transform: scale(1.05);
-}
-
-.nav-logo span {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-}
-
-nav a {
-    color: #fff;
-    margin: 0 0.5rem;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-nav a:hover {
-    color: #ffcc00;
-    transform: translateY(-2px);
-}
-
-
+/* Logo container (unchanged) */
 .nav-logo a {
     display: inline-block; /* Ensure the anchor tag does not affect the layout */
 }
@@ -81,28 +25,14 @@ nav a:hover {
     transition: transform 0.5s ease;
     vertical-align: middle; /* Align image vertically */
 }
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    margin-left: 145px;
-}
 .nav-logo {
     display: flex;
     align-items: center;
     margin-right: 20px;
-    margin-left: -50px;
+    margin-left: -50px; /* You can remove or adjust if desired */
 }
 .nav-logo:hover {
     transform: scale(1.05);
-}
-.nav-logo img {
-    max-width: 45px;
-    margin-right: 10px;
-    transition: transform 0.5s ease;
 }
 .nav-logo:hover img {
     transform: scale(1.05);
@@ -112,6 +42,28 @@ nav {
     font-weight: 600;
     color: #fff;
 }
+
+/* The main nav container */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Put logo on the left */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the entire nav horizontally */
+    padding: 0 20px;
+    /* Removed margin-left: 145px; */
+}
+
+/* The inner nav that holds menu items */
+nav nav {
+    /* This makes the menu centered relative to the parent nav */
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Menu link styles (unchanged) */
 nav a {
     color: #fff;
     margin: 0 0.5rem;
@@ -126,19 +78,19 @@ nav a:hover {
     transform: translateY(-2px);
 }
 
+/* Special "Project List" link styling (unchanged) */
 .project-list-link {
-    color: #fff; /* Text color */
-    background: linear-gradient(135deg, #9b59b6, #3498db); /* Purple to blue gradient */
-    padding: 0.5rem 1rem; /* Padding for better appearance */
-    border-radius: 15px; /* Larger rounded corners */
-    position: relative; /* For positioning the animation */
-    transition: background 0.3s ease, transform 0.3s ease; /* Smooth transition */
-    display: inline-block; /* Ensure proper padding */
-    animation: pulse 1.5s ease infinite; /* Continuous pulse animation */
+    color: #fff;
+    background: linear-gradient(135deg, #9b59b6, #3498db);
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    position: relative;
+    transition: background 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    animation: pulse 1.5s ease infinite;
 }
-
 .project-list-link:hover {
-    background-color: #f1c40f; /* Yellow background on hover */
-    color: #fff; /* White text on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    background-color: #f1c40f;
+    color: #fff;
+    transform: translateY(-2px);
 }
