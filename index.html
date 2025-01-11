@@ -826,6 +826,14 @@
         .timestamp {
             color: black; /* Change text color to black */
         }
+
+        /* Add this CSS to make the header sticky */
+        .sticky-header {
+            position: sticky; /* Make the header sticky */
+            top: 0; /* Stick to the top of the viewport */
+            z-index: 1000; /* Ensure it stays above other content */
+            background-color: rgba(45, 55, 72, 0.9); /* Optional: Add a background color */
+        }
     </style>
 </head>
 <body>
@@ -838,6 +846,12 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+
+                // Apply sticky styles after loading the header
+                const header = document.querySelector('.sticky-header');
+                if (header) {
+                    header.classList.add('sticky-header');
+                }
             });
     </script>
 
