@@ -4,10 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Converter</title>
+
+    <!-- 1) Load your existing header.css (unchanged) -->
+    <link rel="stylesheet" href="../header.css">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="../chat.css">
+
+    <!-- Inline style to fix header at the top & push container down -->
+    <style>
+        /* Pin the header at the top */
+        #header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        /* Add some top margin so .container appears below the header */
+        .container {
+            margin-top: 100px; /* Adjust as needed */
+        }
+    </style>
 </head>
 <body>
+
+    <!-- 2) A container to inject header.html -->
+    <div id="header-container"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <div class="container">
         <h1>Converter</h1>
         <select id="category">
@@ -21,53 +51,62 @@
         <button id="convertButton">Convert</button>
         <p id="result">Result: </p>
     </div>
-      <!-- Chat widget -->
-      <div id="chatContainer"></div>
 
-      <script>
-          document.addEventListener('DOMContentLoaded', function() {
-              // Focus on the input field when the page loads
-              const todoInput = document.getElementById('todo-input');
-              if (todoInput) {
-                  todoInput.focus();
-              }
-  
-              // Load chat widget HTML
-              fetch('../chat.html')
-                  .then(response => response.text())
-                  .then(data => {
-                      document.getElementById('chatContainer').innerHTML = data;
-                      // Initialize chat widget functionality
-                      const chatButton = document.getElementById('chatButton');
-                      const chatContainer = document.querySelector('.chat-container');
-                      const closeChat = document.getElementById('closeChat');
-  
-                      if (chatButton) {
-                          chatButton.addEventListener('click', function() {
-                              chatContainer.classList.toggle('active');
-                              console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
-                          });
-                      } else {
-                          console.error('Chat button not found!');
-                      }
-  
-                      if (closeChat) {
-                          closeChat.addEventListener('click', function() {
-                              chatContainer.classList.remove('active');
-                              console.log('Close chat button clicked');
-                          });
-                      } else {
-                          console.error('Close chat button not found!');
-                      }
-                  })
-                  .catch(error => console.error('Error loading chat widget:', error));
-          });
-  
-          function navigateTo(url) {
-              window.location.href = url;
-          }
- 
-       </script>
+    <!-- Chat widget -->
+    <div id="chatContainer"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 3) Fetch header.html and inject into #header-container
+            fetch('../header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-container').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+
+            // Focus on the input field when the page loads
+            const todoInput = document.getElementById('todo-input');
+            if (todoInput) {
+                todoInput.focus();
+            }
+
+            // Load chat widget HTML
+            fetch('../chat.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('chatContainer').innerHTML = data;
+                    // Initialize chat widget functionality
+                    const chatButton = document.getElementById('chatButton');
+                    const chatContainer = document.querySelector('.chat-container');
+                    const closeChat = document.getElementById('closeChat');
+
+                    if (chatButton) {
+                        chatButton.addEventListener('click', function() {
+                            chatContainer.classList.toggle('active');
+                            console.log('Chat button clicked, chatContainer active:', chatContainer.classList.contains('active'));
+                        });
+                    } else {
+                        console.error('Chat button not found!');
+                    }
+
+                    if (closeChat) {
+                        closeChat.addEventListener('click', function() {
+                            chatContainer.classList.remove('active');
+                            console.log('Close chat button clicked');
+                        });
+                    } else {
+                        console.error('Close chat button not found!');
+                    }
+                })
+                .catch(error => console.error('Error loading chat widget:', error));
+        });
+
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
     <script src="script.js"></script>
 </body>
 </html>
