@@ -10,8 +10,8 @@ header {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     padding: 1.5rem 0;
     text-align: center;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     box-shadow: none;
     height: auto; /* Ensure header height is auto */
 }
@@ -25,8 +25,8 @@ header {
     background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
     padding: 1rem 0;
     text-align: center;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
