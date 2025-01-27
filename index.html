@@ -984,5 +984,51 @@
     </div>
 </div>
 
+<!-- Chat Widget -->
+<div class="chat-widget" id="chatWidget">
+    <div class="chat-button" id="chatButton">
+        <div class="chat-button-content">
+            <span>Chat</span>
+        </div>
+        <!-- Update profile photo to match header style -->
+        <img src="image/marketer.png" alt="Johnson's Profile" style="width: 40px; height: 40px; border-radius: 50%; margin-left: 22px;"/>
+    </div>
+
+    <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h3>Chat with Johnson</h3>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="timestamp bold-text">Johnson</div><br/>
+            <div class="message bot">
+                Hello! Please contact me at 
+                <a href="mailto:johnsonmarketer@outlook.com" style="all: unset; color: black; text-decoration: underline; cursor: pointer;">
+                    johnsonmarketer@outlook.com
+                </a><br/>
+            </div>
+        </div>
+        <div class="chat-options">
+            <button class="option-button" onclick="navigateTo('https://www.johnsonmarketer.com')">Back to Home</button>
+            <button class="option-button" onclick="navigateTo('https://projects.johnsonmarketer.com')">Back to Software Projects</button>
+            <button class="option-button" onclick="navigateTo('https://marketing.johnsonmarketer.com')">Back to Marketing Projects</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const chatButton = document.getElementById("chatButton");
+        const chatContainer = document.getElementById("chatContainer");
+
+        chatButton.addEventListener("click", function() {
+            chatContainer.classList.toggle("active");
+        });
+    });
+
+    function navigateTo(url) {
+        window.location.href = url;
+    }
+</script>
+
 </body>
 </html>
