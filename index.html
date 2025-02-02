@@ -853,15 +853,16 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* This ensures proper centering */
     width: 80%;
-    max-width: 300px;
-    background: rgba(0, 0, 0, 0.8);
+    max-width: 320px;
+    background: rgba(0, 0, 0, 0.9);
     color: white;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
     border-radius: 10px;
-    z-index: 1000;
+    z-index: 9999; /* Ensure it's above everything */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 #mobile-warning button {
