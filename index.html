@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="chat.css">
     <link rel="stylesheet" href="header.css">
+    <script src="script.js"></script>
     <style>
         body, html {
             overflow-x: hidden; /* Prevent horizontal overflow */
@@ -843,9 +844,55 @@
             border-radius: 8px;
             text-align: center;
         }
+
+ 
+
+/* Styles for the mobile warning */
+#mobile-warning {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    z-index: 1000;
+}
+
+#mobile-warning button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    background: #ff4444;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#mobile-warning button:hover {
+    background: #cc0000;
+}
+
+
+
+
+
+
     </style>
 </head>
 <body>
+
+    <div id="mobile-warning">
+        <p>This website is not optimized for mobile phones yet. For the best experience, please use a desktop.</p>
+        <button onclick="closeWarning()">OK</button>
+    </div>
+
+
     <!-- Load header.html into the header-placeholder div -->
     <header class="sticky-header debug-header">
         <nav class="main-nav">
